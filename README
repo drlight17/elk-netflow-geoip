@@ -1,0 +1,49 @@
+To create new index TEMPLATE do the following from DevTools in Kibana:
+
+PUT _template/netflow
+{
+  "index_patterns": [
+    "netflow*"
+  ],
+  "mappings": {
+    "properties": {
+         "@timestamp": {
+          "type": "date"
+        },
+		"geoip_src" : {
+          "dynamic" : true,
+          "properties" : {
+            "ip" : {
+              "type" : "ip"
+            },
+            "latitude" : {
+              "type" : "half_float"
+            },
+            "location" : {
+              "type" : "geo_point"
+            },
+            "longitude" : {
+              "type" : "half_float"
+            }
+          }
+        },
+		"geoip_dst" : {
+          "dynamic" : true,
+          "properties" : {
+            "ip" : {
+              "type" : "ip"
+            },
+            "latitude" : {
+              "type" : "half_float"
+            },
+            "location" : {
+              "type" : "geo_point"
+            },
+            "longitude" : {
+              "type" : "half_float"
+            }
+          }
+        }
+    }
+  }
+}
